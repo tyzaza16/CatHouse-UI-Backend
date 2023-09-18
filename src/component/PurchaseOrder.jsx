@@ -9,7 +9,7 @@ import tracking from '../assets/tracking.png';
 import historical from '../assets/historical.png';
 import view from '../assets/view.png';
 import { Link } from 'react-router-dom';
-import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
+import { Checkbox } from '@chakra-ui/react'
 
 const ViewButton = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -107,7 +107,7 @@ const ViewButton = () => {
           </Modal>
         </Box>
     );
-  };
+};
 
 const PurchaseOrder=()=>{
     return(
