@@ -9,163 +9,163 @@ import tracking from '../assets/tracking.png';
 import historical from '../assets/historical.png';
 import view from '../assets/view.png';
 import { Link } from 'react-router-dom';
+import { v4 as uuid4 } from "uuid";
 
-const AddProduct = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const modalRef = useRef(null);
+// const AddProduct = () => {
+//   const [isOpen, setIsOpen] = useState(false);
+//   const modalRef = useRef(null);
 
-  const onOpen = () => {
-    setIsOpen(true);
-  };
+//   const onOpen = () => {
+//     setIsOpen(true);
+//   };
 
-  const onClose = () => {
-    setIsOpen(false);
-  };
+//   const onClose = () => {
+//     setIsOpen(false);
+//   };
 
-  const handleOverlayClick = (event) => {
-    if (event.target === event.currentTarget) {
-      onClose();
-    }
-  };
-
-  return (
-      <Box>
-        <Button onClick={onOpen} w="113px" h="40px" right="-12px" position="relative" bottom="-10px" borderRadius="50px" bg="#564DE6" border="none" p={0} _hover={{ bg: '#2C23BF', boxShadow: '0 5px 10px rgba(0, 0, 0, .1)'  }}>
-          <Text color="white" fontSize="14" position="relative">Add Product</Text>
-        </Button>
-        <Modal isOpen={isOpen} onClose={onClose} onOverlayClick={handleOverlayClick} closeOnEsc={false}>
-        <ModalOverlay/>
-        <ModalContent ref={modalRef} maxW="980px" w="100%" maxH="620px" h="100%">
-          <ModalHeader></ModalHeader>
-          <ModalBody fontFamily={'Kanit, sans-serif'} >
-            <Flex>
-              <Box>
-              <Box w="700px" h="45px" position="relative" top="-10px" >
-                <Box fontWeight="bold" fontSize="18" position="relative" right="-10px" top="-8px">เพิ่มสินค้า</Box>
-                <Box fontSize="14" position="relative" right="-40px" top="-10px">เพิ่มสินค้าลงคลัง</Box>
-              </Box>
-              <Box w="700px" h="500px" position="relative" >
-                <Box>
-                  <Flex h="100%">
-                    <Box>
-                      <InputGroup  position="relative" right="-30px" >
-                        <Input htmlSize={32} width='200px' placeholder="ยี่ห้อ" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
-                      </InputGroup>
-                      <InputGroup position="relative" bottom="-10px" right="-30px">
-                        <Input htmlSize={32} width='200px' placeholder="ชื่อสินค้า" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
-                      </InputGroup>
-                      <InputGroup position="relative" bottom="-20px" right="-30px">
-                        <Input htmlSize={32} width='200px' placeholder="ราคา" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
-                      </InputGroup>
-                    </Box>
-                    <Textarea
-                      placeholder="คุณสมบัติโดยรวม"
-                      w="420px"
-                      h="140px"
-                      resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
-                      rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
-                      position="relative" right="-50px"
-                    />
-                  </Flex>
-                  <Box position="relative" bottom="-15px" right="-10px" ><Text>รายละเอียดสินค้า</Text></Box>
+//   const handleOverlayClick = (event) => {
+//     if (event.target === event.currentTarget) {
+//       onClose();
+//     }
+//   };
+//   return (
+//       <Box>
+//         <Button onClick={onOpen} w="113px" h="40px" right="-12px" position="relative" bottom="-10px" borderRadius="50px" bg="#564DE6" border="none" p={0} _hover={{ bg: '#2C23BF', boxShadow: '0 5px 10px rgba(0, 0, 0, .1)'  }}>
+//           <Text color="white" fontSize="14" position="relative">Add Product</Text>
+//         </Button>
+//         <Modal isOpen={isOpen} onClose={onClose} onOverlayClick={handleOverlayClick} closeOnEsc={false}>
+//         <ModalOverlay/>
+//         <ModalContent ref={modalRef} maxW="980px" w="100%" maxH="620px" h="100%">
+//           <ModalHeader></ModalHeader>
+//           <ModalBody fontFamily={'Kanit, sans-serif'} >
+//             <Flex>
+//               <Box>
+//               <Box w="700px" h="45px" position="relative" top="-10px" >
+//                 <Box fontWeight="bold" fontSize="18" position="relative" right="-10px" top="-8px">เพิ่มสินค้า</Box>
+//                 <Box fontSize="14" position="relative" right="-40px" top="-10px">เพิ่มสินค้าลงคลัง</Box>
+//               </Box>
+//               <Box w="700px" h="500px" position="relative" >
+//                 <Box>
+//                   <Flex h="100%">
+//                     <Box>
+//                       <InputGroup  position="relative" right="-30px" >
+//                         <Input htmlSize={32} width='200px' placeholder="ยี่ห้อ" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
+//                       </InputGroup>
+//                       <InputGroup position="relative" bottom="-10px" right="-30px">
+//                         <Input htmlSize={32} width='200px' placeholder="ชื่อสินค้า" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
+//                       </InputGroup>
+//                       <InputGroup position="relative" bottom="-20px" right="-30px">
+//                         <Input htmlSize={32} width='200px' placeholder="ราคา" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
+//                       </InputGroup>
+//                     </Box>
+//                     <Textarea
+//                       placeholder="คุณสมบัติโดยรวม"
+//                       w="420px"
+//                       h="140px"
+//                       resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+//                       rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+//                       position="relative" right="-50px"
+//                     />
+//                   </Flex>
+//                   <Box position="relative" bottom="-15px" right="-10px" ><Text>รายละเอียดสินค้า</Text></Box>
                   
-                  <Flex position="relative" right="-30px">
-                    <Box position="relative" bottom="-20px">
-                      <Textarea
-                          placeholder="รายละเอียดสินค้า"
-                          w="200px"
-                          h="140px"
-                          resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
-                          rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
-                          position="relative" bottom="-10px"
-                      />
-                    </Box>
+//                   <Flex position="relative" right="-30px">
+//                     <Box position="relative" bottom="-20px">
+//                       <Textarea
+//                           placeholder="รายละเอียดสินค้า"
+//                           w="200px"
+//                           h="140px"
+//                           resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+//                           rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+//                           position="relative" bottom="-10px"
+//                       />
+//                     </Box>
 
-                    <Box position="relative" bottom="-20px" right="-20px">
-                      <Textarea
-                          placeholder="รายละเอียดคุณสมบัติ"
-                          w="200px"
-                          h="140px"
-                          resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
-                          rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
-                          position="relative" bottom="-10px"
-                      />
-                    </Box>
+//                     <Box position="relative" bottom="-20px" right="-20px">
+//                       <Textarea
+//                           placeholder="รายละเอียดคุณสมบัติ"
+//                           w="200px"
+//                           h="140px"
+//                           resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+//                           rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+//                           position="relative" bottom="-10px"
+//                       />
+//                     </Box>
 
-                    <Box position="relative" bottom="-20px" right="-40px">
-                      <Textarea
-                          placeholder="รายละเอียดวิธีใช้งาน"
-                          w="200px"
-                          h="140px"
-                          resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
-                          rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
-                          position="relative" bottom="-10px"
-                      />
-                    </Box>
-                  </Flex>
-                  <Flex position="relative" right="-30px" bottom="-20px">
-                    <Box position="relative" bottom="-20px">
-                      <Textarea
-                          placeholder="รายละเอียดคำแนะนำ"
-                          w="200px"
-                          h="140px"
-                          resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
-                          rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
-                          position="relative" bottom="-10px"
-                      />
-                    </Box>
+//                     <Box position="relative" bottom="-20px" right="-40px">
+//                       <Textarea
+//                           placeholder="รายละเอียดวิธีใช้งาน"
+//                           w="200px"
+//                           h="140px"
+//                           resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+//                           rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+//                           position="relative" bottom="-10px"
+//                       />
+//                     </Box>
+//                   </Flex>
+//                   <Flex position="relative" right="-30px" bottom="-20px">
+//                     <Box position="relative" bottom="-20px">
+//                       <Textarea
+//                           placeholder="รายละเอียดคำแนะนำ"
+//                           w="200px"
+//                           h="140px"
+//                           resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+//                           rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+//                           position="relative" bottom="-10px"
+//                       />
+//                     </Box>
 
-                    <Box position="relative" bottom="-20px" right="-20px">
-                      <Textarea
-                          placeholder="รายละเอียดข้อควรระวัง"
-                          w="200px"
-                          h="140px"
-                          resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
-                          rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
-                          position="relative" bottom="-10px"
-                      />
-                    </Box>
+//                     <Box position="relative" bottom="-20px" right="-20px">
+//                       <Textarea
+//                           placeholder="รายละเอียดข้อควรระวัง"
+//                           w="200px"
+//                           h="140px"
+//                           resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+//                           rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+//                           position="relative" bottom="-10px"
+//                       />
+//                     </Box>
 
-                  </Flex>
-                  </Box>
+//                   </Flex>
+//                   </Box>
 
                 
                 
-              </Box>
-            </Box>
+//               </Box>
+//             </Box>
 
-            <Box w="300px" h="500px">
-              <Box position="relative" bottom="-10px" ><Text>ข้อมูลจำเพาะ</Text></Box>
-                <Box position="relative" bottom="-20px">
-                  <Input htmlSize={32} position="relative" right="-20px" width='200px' placeholder="แบรนด์" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
-                  <Input htmlSize={32} position="relative" bottom="-10px" right="-20px" width='200px' placeholder="วัสดุหลัก" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
-                  <Input htmlSize={32} position="relative" bottom="-20px" right="-20px" width='200px' placeholder="ความสูง (ซม.)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
-                  <Input htmlSize={32} position="relative" bottom="-30px" right="-20px" width='200px' placeholder="ความกว้าง (ซม.)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
-                  <Input htmlSize={32} position="relative" bottom="-40px" right="-20px" width='200px' placeholder="ความลึก (ซม.)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
-                  <Input htmlSize={32} position="relative" bottom="-50px" right="-20px" width='200px' placeholder="ขนาดสินค้า (นิ้ว)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
-                </Box>
-            </Box>
+//             <Box w="300px" h="500px">
+//               <Box position="relative" bottom="-10px" ><Text>ข้อมูลจำเพาะ</Text></Box>
+//                 <Box position="relative" bottom="-20px">
+//                   <Input htmlSize={32} position="relative" right="-20px" width='200px' placeholder="แบรนด์" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
+//                   <Input htmlSize={32} position="relative" bottom="-10px" right="-20px" width='200px' placeholder="วัสดุหลัก" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
+//                   <Input htmlSize={32} position="relative" bottom="-20px" right="-20px" width='200px' placeholder="ความสูง (ซม.)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
+//                   <Input htmlSize={32} position="relative" bottom="-30px" right="-20px" width='200px' placeholder="ความกว้าง (ซม.)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
+//                   <Input htmlSize={32} position="relative" bottom="-40px" right="-20px" width='200px' placeholder="ความลึก (ซม.)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
+//                   <Input htmlSize={32} position="relative" bottom="-50px" right="-20px" width='200px' placeholder="ขนาดสินค้า (นิ้ว)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
+//                 </Box>
+//             </Box>
 
-            </Flex>
+//             </Flex>
             
               
             
 
-          </ModalBody>
-          <ModalFooter fontFamily={'Kanit, sans-serif'}>
-            <Button onClick={onClose} w="184px" h="40px" borderRadius="8px" bg="white" border="none" p={0} style={{borderRadius: '5px', border: '1px solid #0F63E9'}} _hover={{ borderColor: 'white', boxShadow: '0 5px 10px rgba(0, 0, 0, .2)'  }} position="relative" top="-70px" >
-              <Text color="#0F63E9" fontSize="14">ยกเลิก</Text>
-            </Button>
-            <Box w="10px" h="10px"  />
-            <Button onClick={onOpen} w="184px" h="40px" borderRadius="8px" bg="#564DE6" border="none" p={0} _hover={{ bg: '#2C23BF', boxShadow: '0 5px 10px rgba(0, 0, 0, .2)' }} position="relative" top="-70px" >
-              <Text color="white" fontSize="14">บันทึก</Text>
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-        </Modal>
-      </Box>
-  );
-};
+//           </ModalBody>
+//           <ModalFooter fontFamily={'Kanit, sans-serif'}>
+//             <Button onClick={onClose} w="184px" h="40px" borderRadius="8px" bg="white" border="none" p={0} style={{borderRadius: '5px', border: '1px solid #0F63E9'}} _hover={{ borderColor: 'white', boxShadow: '0 5px 10px rgba(0, 0, 0, .2)'  }} position="relative" top="-70px" >
+//               <Text color="#0F63E9" fontSize="14">ยกเลิก</Text>
+//             </Button>
+//             <Box w="10px" h="10px"  />
+//             <Button onClick={onOpen} w="184px" h="40px" borderRadius="8px" bg="#564DE6" border="none" p={0} _hover={{ bg: '#2C23BF', boxShadow: '0 5px 10px rgba(0, 0, 0, .2)' }} position="relative" top="-70px" >
+//               <Text color="white" fontSize="14">บันทึก</Text>
+//             </Button>
+//           </ModalFooter>
+//         </ModalContent>
+//         </Modal>
+//       </Box>
+//   );
+// };
 
 function ExcelFileUploader() {
     const [data, setData] = useState(null);
@@ -209,7 +209,164 @@ function ExcelFileUploader() {
     );
 };
 
-const ViewAndEditButton = () => {
+// const ViewAndEditButton = () => {
+//   const [isOpen, setIsOpen] = useState(false);
+//   const modalRef = useRef(null);
+
+//   const onOpen = () => {
+//     setIsOpen(true);
+//   };
+
+//   const onClose = () => {
+//     setIsOpen(false);
+//   };
+
+//   const handleOverlayClick = (event) => {
+//     if (event.target === event.currentTarget) {
+//       onClose();
+//     }
+//   };
+
+//   return (
+//       <Box>
+//         <Button onClick={onOpen} w="40px" h="35px" position="relative" bottom="-2px" border="2px solid #564DE6" borderRadius="8px" bg="white" p={0} _hover={{ boxShadow: '0 5px 10px rgba(0, 0, 0, .1)'  }}>
+//           <Image src={view} alt="Image 2" w="25px" h="25px" />
+//         </Button>
+//         <Modal isOpen={isOpen} onClose={onClose} onOverlayClick={handleOverlayClick} closeOnEsc={false}>
+//         <ModalOverlay/>
+//         <ModalContent ref={modalRef} maxW="980px" w="100%" maxH="620px" h="100%">
+//           <ModalHeader></ModalHeader>
+//           <ModalBody fontFamily={'Kanit, sans-serif'} >
+//             <Flex>
+//               <Box>
+//               <Box w="700px" h="45px" position="relative" top="-10px" >
+//                 <Box fontWeight="bold" fontSize="18" position="relative" right="-10px" top="-8px">เพิ่มสินค้า</Box>
+//                 <Box fontSize="14" position="relative" right="-40px" top="-10px">เพิ่มสินค้าลงคลัง</Box>
+//               </Box>
+//               <Box w="700px" h="500px" position="relative" >
+//                 <Box>
+//                   <Flex h="100%">
+//                     <Box>
+//                       <InputGroup  position="relative" right="-30px" >
+//                         <Input readOnly htmlSize={32} width='200px' placeholder="ยี่ห้อ" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
+//                       </InputGroup>
+//                       <InputGroup position="relative" bottom="-10px" right="-30px">
+//                         <Input readOnly htmlSize={32} width='200px' placeholder="ชื่อสินค้า" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
+//                       </InputGroup>
+//                       <InputGroup position="relative" bottom="-20px" right="-30px">
+//                         <Input readOnly htmlSize={32} width='200px' placeholder="ราคา" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
+//                       </InputGroup>
+//                     </Box>
+//                     <Textarea readOnly
+//                       placeholder="คุณสมบัติโดยรวม"
+//                       w="420px"
+//                       h="140px"
+//                       resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+//                       rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+//                       position="relative" right="-50px"
+//                     />
+//                   </Flex>
+//                   <Box position="relative" bottom="-15px" right="-10px" ><Text>รายละเอียดสินค้า</Text></Box>
+                  
+//                   <Flex position="relative" right="-30px">
+//                     <Box position="relative" bottom="-20px">
+//                       <Textarea readOnly
+//                           placeholder="รายละเอียดสินค้า"
+//                           w="200px"
+//                           h="140px"
+//                           resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+//                           rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+//                           position="relative" bottom="-10px"
+//                       />
+//                     </Box>
+
+//                     <Box position="relative" bottom="-20px" right="-20px">
+//                       <Textarea readOnly
+//                           placeholder="รายละเอียดคุณสมบัติ"
+//                           w="200px"
+//                           h="140px"
+//                           resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+//                           rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+//                           position="relative" bottom="-10px"
+//                       />
+//                     </Box>
+
+//                     <Box position="relative" bottom="-20px" right="-40px">
+//                       <Textarea readOnly
+//                           placeholder="รายละเอียดวิธีใช้งาน"
+//                           w="200px"
+//                           h="140px"
+//                           resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+//                           rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+//                           position="relative" bottom="-10px"
+//                       />
+//                     </Box>
+//                   </Flex>
+//                   <Flex position="relative" right="-30px" bottom="-20px">
+//                     <Box position="relative" bottom="-20px">
+//                       <Textarea readOnly
+//                           placeholder="รายละเอียดคำแนะนำ"
+//                           w="200px"
+//                           h="140px"
+//                           resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+//                           rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+//                           position="relative" bottom="-10px"
+//                       />
+//                     </Box>
+
+//                     <Box position="relative" bottom="-20px" right="-20px">
+//                       <Textarea readOnly
+//                           placeholder="รายละเอียดข้อควรระวัง"
+//                           w="200px"
+//                           h="140px"
+//                           resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+//                           rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+//                           position="relative" bottom="-10px"
+//                       />
+//                     </Box>
+
+//                   </Flex>
+//                   </Box>
+
+                
+                
+//               </Box>
+//             </Box>
+
+//             <Box w="300px" h="500px">
+//               <Box position="relative" bottom="-10px" ><Text>ข้อมูลจำเพาะ</Text></Box>
+//                 <Box position="relative" bottom="-20px">
+//                   <Input readOnly htmlSize={32} position="relative" right="-20px" width='200px' placeholder="แบรนด์" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
+//                   <Input readOnly htmlSize={32} position="relative" bottom="-10px" right="-20px" width='200px' placeholder="วัสดุหลัก" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
+//                   <Input readOnly htmlSize={32} position="relative" bottom="-20px" right="-20px" width='200px' placeholder="ความสูง (ซม.)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
+//                   <Input readOnly htmlSize={32} position="relative" bottom="-30px" right="-20px" width='200px' placeholder="ความกว้าง (ซม.)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
+//                   <Input readOnly htmlSize={32} position="relative" bottom="-40px" right="-20px" width='200px' placeholder="ความลึก (ซม.)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
+//                   <Input readOnly htmlSize={32} position="relative" bottom="-50px" right="-20px" width='200px' placeholder="ขนาดสินค้า (นิ้ว)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
+//                 </Box>
+//             </Box>
+
+//             </Flex>
+            
+              
+            
+
+//           </ModalBody>
+//           <ModalFooter fontFamily={'Kanit, sans-serif'}>
+//             <Button onClick={onClose} w="184px" h="40px" borderRadius="8px" bg="white" border="none" p={0} style={{borderRadius: '5px', border: '1px solid #0F63E9'}} _hover={{ borderColor: 'white', boxShadow: '0 5px 10px rgba(0, 0, 0, .2)'  }} position="relative" top="-70px" >
+//               <Text color="#0F63E9" fontSize="14">ยกเลิก</Text>
+//             </Button>
+//             <Box w="10px" h="10px"  />
+//             <Button onClick={onOpen} w="184px" h="40px" borderRadius="8px" bg="#564DE6" border="none" p={0} _hover={{ bg: '#2C23BF', boxShadow: '0 5px 10px rgba(0, 0, 0, .2)' }} position="relative" top="-70px" >
+//               <Text color="white" fontSize="14">บันทึก</Text>
+//             </Button>
+//           </ModalFooter>
+//         </ModalContent>
+//         </Modal>
+//       </Box>
+//   );
+// };
+
+const ProductManagement=()=>{
   const [isOpen, setIsOpen] = useState(false);
   const modalRef = useRef(null);
 
@@ -227,146 +384,189 @@ const ViewAndEditButton = () => {
     }
   };
 
-  return (
-      <Box>
-        <Button onClick={onOpen} w="40px" h="35px" position="relative" bottom="-2px" border="2px solid #564DE6" borderRadius="8px" bg="white" p={0} _hover={{ boxShadow: '0 5px 10px rgba(0, 0, 0, .1)'  }}>
-          <Image src={view} alt="Image 2" w="25px" h="25px" />
-        </Button>
-        <Modal isOpen={isOpen} onClose={onClose} onOverlayClick={handleOverlayClick} closeOnEsc={false}>
-        <ModalOverlay/>
-        <ModalContent ref={modalRef} maxW="980px" w="100%" maxH="620px" h="100%">
-          <ModalHeader></ModalHeader>
-          <ModalBody fontFamily={'Kanit, sans-serif'} >
-            <Flex>
-              <Box>
-              <Box w="700px" h="45px" position="relative" top="-10px" >
-                <Box fontWeight="bold" fontSize="18" position="relative" right="-10px" top="-8px">เพิ่มสินค้า</Box>
-                <Box fontSize="14" position="relative" right="-40px" top="-10px">เพิ่มสินค้าลงคลัง</Box>
-              </Box>
-              <Box w="700px" h="500px" position="relative" >
-                <Box>
-                  <Flex h="100%">
-                    <Box>
-                      <InputGroup  position="relative" right="-30px" >
-                        <Input readOnly htmlSize={32} width='200px' placeholder="ยี่ห้อ" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
-                      </InputGroup>
-                      <InputGroup position="relative" bottom="-10px" right="-30px">
-                        <Input readOnly htmlSize={32} width='200px' placeholder="ชื่อสินค้า" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
-                      </InputGroup>
-                      <InputGroup position="relative" bottom="-20px" right="-30px">
-                        <Input readOnly htmlSize={32} width='200px' placeholder="ราคา" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
-                      </InputGroup>
-                    </Box>
-                    <Textarea readOnly
-                      placeholder="คุณสมบัติโดยรวม"
-                      w="420px"
-                      h="140px"
-                      resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
-                      rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
-                      position="relative" right="-50px"
-                    />
-                  </Flex>
-                  <Box position="relative" bottom="-15px" right="-10px" ><Text>รายละเอียดสินค้า</Text></Box>
-                  
-                  <Flex position="relative" right="-30px">
-                    <Box position="relative" bottom="-20px">
-                      <Textarea readOnly
-                          placeholder="รายละเอียดสินค้า"
-                          w="200px"
-                          h="140px"
-                          resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
-                          rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
-                          position="relative" bottom="-10px"
-                      />
-                    </Box>
+    // สร้างสถานะสำหรับรายการผลิตภัณฑ์
+    const [products, setProducts] = useState([]);
+    // สถานะสำหรับแก้ไขผลิตภัณฑ์
+    const [editProduct, setEditProduct] = useState(null);
+    // สถานะสำหรับ Modal เพิ่มผลิตภัณฑ์
+    const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
+    // สถานะสำหรับ Modal ลบผลิตภัณฑ์
+    const [isDeleteProductModalOpen, setIsDeleteProductModalOpen] =
+      useState(false);
+    // สถานะสำหรับเก็บรายการผลิตภัณฑ์ที่จะลบ
+    const [productToDelete, setProductToDelete] = useState(null);
+  
+    // สถานะสำหรับยี่ห้อ,ชื่อ,ราคา,คุณสมบัติ ของผลิตภัณฑ์ที่เพิ่มและแก้ไข
+    const [productbrand, setProductbrand] = useState("");
+    const [productName, setProductName] = useState("");
+    const [productPrice, setProductPrice] = useState("");
+    const [productfeature, setProductfeature] = useState("");
+    //รายละเอียดสินค้า 
+    const [productdetails, setdetails] = useState("");
+    const [productdetailsfeature, setProductdetproductdetailsfeature] = useState("");
+    const [productdetailshowtouse, setProductdeproductdetailshowtouse] = useState("");     //รายละเอียดวิธีใช้งาน
+    const [productdetailinstructions, setProductdetailinstructions] = useState("");      //รายละเอียดคำแนะนำ
+    const [productdetailPrecaution, setProductdetailPrecaution] = useState("");
+  //ข้อมูลจำเพาะ
+    const [productmainmaterial, setProductmainmateria] = useState("");//วัสดุ
+    const [productheight, setProductheight] = useState(""); 
+    const [productwidth, setProductwidth] = useState("");
+    const [productdepth,setProductdepth ] = useState("");
+    const [productsize,setProductsize ] = useState("");
+    // เปิด Modal เพิ่มผลิตภัณฑ์
+    const openAddProductModal = () => {
+      setIsAddProductModalOpen(true);
+      setProductbrand("");
+      setProductName("");
+      setProductPrice("");
+      setProductfeature("");
+      setdetails("");
+      setProductdetproductdetailsfeature("");
+      setProductdeproductdetailshowtouse("");
+      setProductdetailinstructions("");
+      setProductdetailPrecaution("");
+      setProductmainmateria("");
+      setProductheight("");
+      setProductwidth("");
+      setProductdepth("");
+      setProductsize("");
+    };
+  
+    // ปิด Modal เพิ่มผลิตภัณฑ์
+    const closeAddProductModal = () => {
+      setIsAddProductModalOpen(false);
+    };
+  
+    // เพิ่มผลิตภัณฑ์
+    const addProduct = () => {
+      const newProduct = {
+        id: uuid4(),
+        name: productName,
+        price: productPrice,
+        brand: productbrand,
+        feature: productfeature,
+        details: productdetails,
+        detailsfeature: productdetailsfeature,
+        detailshowtouse: productdetailshowtouse,
+        detailinstructions: productdetailinstructions,
+        detailPrecaution: productdetailPrecaution,
+        mainmaterial: productmainmaterial,
+        height: productheight,
+        width: productwidth,
+        depth: productdepth,
+        size: productsize,
+      };
+      console.log("newProduct",newProduct)
+  
+      // เคลียร์ค่าที่ป้อนใน Input
+      setIsAddProductModalOpen(true);
+      setProductbrand("");
+      setProductName("");
+      setProductPrice("");
+      setProductfeature("");
+      setdetails("");
+      setProductdetproductdetailsfeature("");
+      setProductdeproductdetailshowtouse("");
+      setProductdetailinstructions("");
+      setProductdetailPrecaution("");
+      setProductmainmateria("");
+      setProductheight("");
+      setProductwidth("");
+      setProductdepth("");
+      setProductsize("");
+      
+      setProducts([...products, newProduct]);
+      closeAddProductModal();
+    };
+  
+    // เปิด Modal แก้ไขผลิตภัณฑ์
+    const openEditProductModal = (product) => {
+      setEditProduct(product);
+      // ตั้งค่าค่าเริ่มต้นของ productName และ productPrice เพื่อแสดงค่าเดิม
+      setProductName(product.name);
+      setProductPrice(product.price);
+      setProductbrand(product.brand);
+      setProductfeature(product.feature);
+      setdetails(product.details);
+      setProductdetproductdetailsfeature(product.detailsfeature);
+      setProductdeproductdetailshowtouse(product.detailshowtouse);
+      setProductdetailinstructions(product.detailinstructions);
+      setProductdetailPrecaution(product.detailPrecaution);
+      setProductmainmateria(product.mainmaterial);
+      setProductheight(product.height);
+      setProductwidth(product.width);
+      setProductdepth(product.depth);
+      setProductsize(product.size);
+    };
+  
+    // ปิด Modal แก้ไขผลิตภัณฑ์
+    const closeEditProductModal = () => {
+      setEditProduct(null);
+    };
+  
+    // บันทึกการแก้ไขผลิตภัณฑ์
+    const saveEditedProduct = () => {
+      const editedProduct = {
+        ...editProduct,
+        name: productName,
+        price: productPrice,
+        brand: productbrand,
+        feature: productfeature,
+        details: productdetails,
+        detailsFeature: productdetailsfeature,
+        detailShowtouse: productdetailshowtouse,
+        detailinstructions: productdetailinstructions,
+        detailPrecaution: productdetailPrecaution,
+        mainmaterial: productmainmaterial,
+        height: productheight,
+        width: productwidth,
+        depth: productdepth,
+        size: productsize,
+      };
+      setProducts(
+        products.map((product) =>
+          product.id === editedProduct.id ? editedProduct : product
+        )
+      );
+      closeEditProductModal();
+  
+      // เคลียร์ค่าที่ป้อนใน Input
+      setProductbrand("");
+      setProductName("");
+      setProductPrice("");
+      setProductfeature("");
+      setdetails("");
+      setProductdetproductdetailsfeature("");
+      setProductdeproductdetailshowtouse("");
+      setProductdetailinstructions("");
+      setProductdetailPrecaution("");
+      setProductmainmateria("");
+      setProductheight("");
+      setProductwidth("");
+      setProductdepth("");
+      setProductsize("");
+    };
+  
+    // เปิด Modal ลบผลิตภัณฑ์
+    const openDeleteProductModal = (product) => {
+      setEditProduct(product);
+      setIsDeleteProductModalOpen(true);
+    };
+  
+    // ปิด Modal ลบผลิตภัณฑ์
+    const closeDeleteProductModal = () => {
+      setEditProduct(null);
+      setIsDeleteProductModalOpen(false);
+    };
+  
+    // ลบผลิตภัณฑ์
+    const deleteProduct = (productToDelete) => {
+      setProducts(
+        products.filter((product) => product.id !== productToDelete.id)
+      );
+      closeDeleteProductModal();
+    };
 
-                    <Box position="relative" bottom="-20px" right="-20px">
-                      <Textarea readOnly
-                          placeholder="รายละเอียดคุณสมบัติ"
-                          w="200px"
-                          h="140px"
-                          resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
-                          rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
-                          position="relative" bottom="-10px"
-                      />
-                    </Box>
-
-                    <Box position="relative" bottom="-20px" right="-40px">
-                      <Textarea readOnly
-                          placeholder="รายละเอียดวิธีใช้งาน"
-                          w="200px"
-                          h="140px"
-                          resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
-                          rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
-                          position="relative" bottom="-10px"
-                      />
-                    </Box>
-                  </Flex>
-                  <Flex position="relative" right="-30px" bottom="-20px">
-                    <Box position="relative" bottom="-20px">
-                      <Textarea readOnly
-                          placeholder="รายละเอียดคำแนะนำ"
-                          w="200px"
-                          h="140px"
-                          resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
-                          rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
-                          position="relative" bottom="-10px"
-                      />
-                    </Box>
-
-                    <Box position="relative" bottom="-20px" right="-20px">
-                      <Textarea readOnly
-                          placeholder="รายละเอียดข้อควรระวัง"
-                          w="200px"
-                          h="140px"
-                          resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
-                          rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
-                          position="relative" bottom="-10px"
-                      />
-                    </Box>
-
-                  </Flex>
-                  </Box>
-
-                
-                
-              </Box>
-            </Box>
-
-            <Box w="300px" h="500px">
-              <Box position="relative" bottom="-10px" ><Text>ข้อมูลจำเพาะ</Text></Box>
-                <Box position="relative" bottom="-20px">
-                  <Input readOnly htmlSize={32} position="relative" right="-20px" width='200px' placeholder="แบรนด์" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
-                  <Input readOnly htmlSize={32} position="relative" bottom="-10px" right="-20px" width='200px' placeholder="วัสดุหลัก" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
-                  <Input readOnly htmlSize={32} position="relative" bottom="-20px" right="-20px" width='200px' placeholder="ความสูง (ซม.)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
-                  <Input readOnly htmlSize={32} position="relative" bottom="-30px" right="-20px" width='200px' placeholder="ความกว้าง (ซม.)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
-                  <Input readOnly htmlSize={32} position="relative" bottom="-40px" right="-20px" width='200px' placeholder="ความลึก (ซม.)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
-                  <Input readOnly htmlSize={32} position="relative" bottom="-50px" right="-20px" width='200px' placeholder="ขนาดสินค้า (นิ้ว)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }}/>
-                </Box>
-            </Box>
-
-            </Flex>
-            
-              
-            
-
-          </ModalBody>
-          <ModalFooter fontFamily={'Kanit, sans-serif'}>
-            <Button onClick={onClose} w="184px" h="40px" borderRadius="8px" bg="white" border="none" p={0} style={{borderRadius: '5px', border: '1px solid #0F63E9'}} _hover={{ borderColor: 'white', boxShadow: '0 5px 10px rgba(0, 0, 0, .2)'  }} position="relative" top="-70px" >
-              <Text color="#0F63E9" fontSize="14">ยกเลิก</Text>
-            </Button>
-            <Box w="10px" h="10px"  />
-            <Button onClick={onOpen} w="184px" h="40px" borderRadius="8px" bg="#564DE6" border="none" p={0} _hover={{ bg: '#2C23BF', boxShadow: '0 5px 10px rgba(0, 0, 0, .2)' }} position="relative" top="-70px" >
-              <Text color="white" fontSize="14">บันทึก</Text>
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-        </Modal>
-      </Box>
-  );
-};
-
-const ProductManagement=()=>{
     return(
       <Box bg="#F8F8F8" w="1920px" h="923px" fontFamily={'Kanit, sans-serif'}>
         <Flex>
@@ -433,29 +633,333 @@ const ProductManagement=()=>{
           </Box>
 
           </Box>
-          
+        
           <Box w="1620px" h="923px" position="relative" right="-50px">
                 <Box h="60px"><Text fontWeight="bold" fontSize="30px" color="#444E5E" position="relative" bottom="-30px" >Product Management</Text></Box>
                 <Box w="1570px" h="770px" bg="#FFFFFF" border="2px dashed #EAEAEA" borderRadius="2%" position="relative" bottom="-50px">
                     <Box w="115px" h="60px" position="relative" right="-20px" bottom="-10px" >
                         <Flex>
-                            <AddProduct/>
+                            {/* <AddProduct/> */}
+                            <Box>
+                              <Button onClick={openAddProductModal} w="113px" h="40px" right="-12px" position="relative" bottom="-10px" borderRadius="50px" bg="#564DE6" border="none" p={0} _hover={{ bg: '#2C23BF', boxShadow: '0 5px 10px rgba(0, 0, 0, .1)'  }}>
+                                <Text color="white" fontSize="14" position="relative">Add Product</Text>
+                              </Button>
+                              <Modal isOpen={isAddProductModalOpen} onClose={closeAddProductModal} onOverlayClick={handleOverlayClick} closeOnEsc={false}>
+                              <ModalOverlay/>
+                              <ModalContent ref={modalRef} maxW="980px" w="100%" maxH="620px" h="100%">
+                                <ModalHeader></ModalHeader>
+                                <ModalBody fontFamily={'Kanit, sans-serif'} >
+                                  <Flex>
+                                    <Box>
+                                    <Box w="700px" h="45px" position="relative" top="-10px" >
+                                      <Box fontWeight="bold" fontSize="18" position="relative" right="-10px" top="-8px">เพิ่มสินค้า</Box>
+                                      <Box fontSize="14" position="relative" right="-40px" top="-10px">เพิ่มสินค้าลงคลัง</Box>
+                                    </Box>
+                                    <Box w="700px" h="500px" position="relative" >
+                                      <Box>
+                                        <Flex h="100%">
+                                          <Box>
+                                            <InputGroup  position="relative" right="-30px" >
+                                              <Input htmlSize={32} width='200px' placeholder="ยี่ห้อ" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }} onChange={(e) =>setProductbrand(e.target.value)}/>
+                                            </InputGroup>
+                                            <InputGroup position="relative" bottom="-10px" right="-30px">
+                                              <Input htmlSize={32} width='200px' placeholder="ชื่อสินค้า" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }} onChange={(e) =>setProductName(e.target.value)}/>
+                                            </InputGroup>
+                                            <InputGroup position="relative" bottom="-20px" right="-30px">
+                                              <Input htmlSize={32} width='200px' placeholder="ราคา" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }} onChange={(e) =>setProductPrice(e.target.value)}/>
+                                            </InputGroup>
+                                          </Box>
+                                          <Textarea
+                                            placeholder="คุณสมบัติโดยรวม"
+                                            w="420px"
+                                            h="140px"
+                                            resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+                                            rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+                                            position="relative" right="-50px"
+                                            onChange={(e) =>
+                                              setProductfeature(e.target.value)
+                                            }
+                                          />
+                                        </Flex>
+                                        <Box position="relative" bottom="-15px" right="-10px" ><Text>รายละเอียดสินค้า</Text></Box>
+                                        
+                                        <Flex position="relative" right="-30px">
+                                          <Box position="relative" bottom="-20px">
+                                            <Textarea
+                                                placeholder="รายละเอียดสินค้า"
+                                                w="200px"
+                                                h="140px"
+                                                resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+                                                rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+                                                position="relative" bottom="-10px"
+                                                onChange={(e) =>
+                                                  setdetails(e.target.value)
+                                                }
+                                            />
+                                          </Box>
+
+                                          <Box position="relative" bottom="-20px" right="-20px">
+                                            <Textarea
+                                                placeholder="รายละเอียดคุณสมบัติ"
+                                                w="200px"
+                                                h="140px"
+                                                resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+                                                rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+                                                position="relative" bottom="-10px"
+                                                onChange={(e) =>
+                                                  setProductdetproductdetailsfeature(e.target.value)
+                                                }
+                                            />
+                                          </Box>
+
+                                          <Box position="relative" bottom="-20px" right="-40px">
+                                            <Textarea
+                                                placeholder="รายละเอียดวิธีใช้งาน"
+                                                w="200px"
+                                                h="140px"
+                                                resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+                                                rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+                                                position="relative" bottom="-10px"
+                                                onChange={(e) =>
+                                                  setProductdeproductdetailshowtouse(e.target.value)
+                                                  }
+                                            />
+                                          </Box>
+                                        </Flex>
+                                        <Flex position="relative" right="-30px" bottom="-20px">
+                                          <Box position="relative" bottom="-20px">
+                                            <Textarea
+                                                placeholder="รายละเอียดคำแนะนำ"
+                                                w="200px"
+                                                h="140px"
+                                                resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+                                                rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+                                                position="relative" bottom="-10px"
+                                                onChange={(e)=> 
+                                                  {setProductdetailinstructions(e.target.value)}} 
+                                            />
+                                          </Box>
+
+                                          <Box position="relative" bottom="-20px" right="-20px">
+                                            <Textarea
+                                                placeholder="รายละเอียดข้อควรระวัง"
+                                                w="200px"
+                                                h="140px"
+                                                resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+                                                rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+                                                position="relative" bottom="-10px"
+                                                onChange={(e) =>
+                                                  setProductdetailPrecaution(e.target.value)
+                                                  }
+                                            />
+                                          </Box>
+
+                                        </Flex>
+                                        </Box>
+                                    </Box>
+                                  </Box>
+
+                                  <Box w="300px" h="500px">
+                                    <Box position="relative" bottom="-10px" ><Text>ข้อมูลจำเพาะ</Text></Box>
+                                      <Box position="relative" bottom="-20px">
+                                        <Input htmlSize={32} position="relative" right="-20px" width='200px' placeholder="แบรนด์" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }} onChange={(e) =>setProductbrand(e.target.value)}/>
+                                        <Input htmlSize={32} position="relative" bottom="-10px" right="-20px" width='200px' placeholder="วัสดุหลัก" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }} onChange={(e) =>setProductmainmateria(e.target.value)}/>
+                                        <Input htmlSize={32} position="relative" bottom="-20px" right="-20px" width='200px' placeholder="ความสูง (ซม.)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }} onChange={(e)=>{setProductheight(e.target.value)}}/>
+                                        <Input htmlSize={32} position="relative" bottom="-30px" right="-20px" width='200px' placeholder="ความกว้าง (ซม.)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }} onChange={(e)=>{setProductwidth(e.target.value)}} />
+                                        <Input htmlSize={32} position="relative" bottom="-40px" right="-20px" width='200px' placeholder="ความลึก (ซม.)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }} onChange={(e)=> {setProductdepth(e.target.value);}}/>
+                                        <Input htmlSize={32} position="relative" bottom="-50px" right="-20px" width='200px' placeholder="ขนาดสินค้า (นิ้ว)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }} onChange={(e)=> {setProductsize(e.target.value);}}/>
+                                      </Box>
+                                  </Box>
+                                  </Flex>
+                                  
+                                </ModalBody>
+                                <ModalFooter fontFamily={'Kanit, sans-serif'}>
+                                  
+                                  <Box w="10px" h="10px"  />
+                                  <Button onClick={addProduct} w="184px" h="40px" borderRadius="8px" bg="#564DE6" border="none" p={0} _hover={{ bg: '#2C23BF', boxShadow: '0 5px 10px rgba(0, 0, 0, .2)' }} position="relative" top="-70px" >
+                                    <Text color="white" fontSize="14">บันทึก</Text>
+                                  </Button>
+                                </ModalFooter>
+                              </ModalContent>
+                              </Modal>
+                            </Box>
                             <ExcelFileUploader/>
                         </Flex>
                     </Box> 
+
                     <Box w="1500px" h="40px" bg="#E8F5FE" borderBottom="4px solid #E7EEF3" borderTop="4px solid #E7EEF3" position="relative" right="-32px" bottom="-20px" >
                       <Flex>
                         <Text position="relative" right="-20px" bottom="-5px">ลำดับ</Text>
-                        <Text position="relative" right="-120px" bottom="-5px">ยี่ห้อ</Text>
+                        <Text position="relative" right="-135px" bottom="-5px">ยี่ห้อ</Text>
                         <Text position="relative" right="-500px" bottom="-5px">ชื่อสินค้า</Text>
-                        <Text position="relative" right="-900px" bottom="-5px">ราคา</Text>
-                        <Text position="relative" right="-1000px" bottom="-5px">จำนวนสินค้าในคลัง</Text>
+                        <Text position="relative" right="-923px" bottom="-5px">ราคา</Text>
+                        <Text position="relative" right="-995px" bottom="-5px">จำนวนสินค้าในคลัง</Text>
                         <Text position="relative" right="-1100px" bottom="-5px">ดูข้อมูล</Text>
                       </Flex>
                     </Box>
 
-                    {/* สินค้าตามลำดับ  */}
                     <Box w="1500px" h="615px" bg="white" overflow="scroll" position="relative" right="-32px" bottom="-20px" >
+                     {products.map((product, index) => (
+                     <Box h="40px" borderBottom="2px solid #E7EEF3">
+                        <Flex display="flex" position="relative">
+                          <Box h="40px" w="80px" display="flex"  justifyContent="center" >
+                            <Text position="relative" bottom="-8px">{index + 1}</Text>
+                          </Box>
+                          <Box h="40px" w="220px">
+                            <Text position="relative" right="-15px" bottom="-8px" >{product.brand}</Text>
+                          </Box>
+                          <Box h="40px" w="710px">
+                            <Text position="relative" right="-15px" bottom="-8px" >{product.name}</Text>
+                          </Box>
+                          <Box h="40px" w="100px" display="flex"  justifyContent="center">
+                            <Text position="relative" bottom="-8px">{product.price}</Text>
+                          </Box>
+                          <Box h="40px" w="200px" display="flex"  justifyContent="center">
+                            <Text position="relative" bottom="-8px">ตามExcel</Text>
+                          </Box>
+                          <Box h="40px" w="100px" display="flex" justifyContent="center" position="relative" right="-40px">
+                            <Box>
+                              <Button onClick={() => openEditProductModal(product)} w="40px" h="35px" position="relative" bottom="-2px" border="2px solid #564DE6" borderRadius="8px" bg="white" p={0} _hover={{ boxShadow: '0 5px 10px rgba(0, 0, 0, .1)'  }}>
+                                <Image src={view} alt="Image 2" w="25px" h="25px" />
+                              </Button>
+                              <Modal isOpen={!!editProduct} onClose={closeEditProductModal} onOverlayClick={handleOverlayClick} closeOnEsc={false}>
+                              <ModalOverlay/>
+                              <ModalContent maxW="980px" w="100%" maxH="620px" h="100%">
+                                <ModalHeader></ModalHeader>
+                                <ModalBody fontFamily={'Kanit, sans-serif'} >
+                                  <Flex>
+                                    <Box>
+                                    <Box w="700px" h="45px" position="relative" top="-10px" >
+                                      <Box fontWeight="bold" fontSize="18" position="relative" right="-10px" top="-8px">แก้ไขสินค้า</Box>
+                                      <Box fontSize="14" position="relative" right="-40px" top="-10px">แก้ไขสินค้าในคลัง</Box>
+                                    </Box>
+                                    <Box w="700px" h="500px" position="relative" >
+                                      <Box>
+                                        <Flex h="100%">
+                                          <Box>
+                                            <InputGroup  position="relative" right="-30px" >
+                                              <Input readOnly htmlSize={32} value={productbrand} width='200px' placeholder="ยี่ห้อ" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }} onChange={(e) =>setProductbrand(e.target.value)}/>
+                                            </InputGroup>
+                                            <InputGroup position="relative" bottom="-10px" right="-30px">
+                                              <Input readOnly htmlSize={32} value={productName} width='200px' placeholder="ชื่อสินค้า" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }} onChange={(e) =>setProductName(e.target.value)}/>
+                                            </InputGroup>
+                                            <InputGroup position="relative" bottom="-20px" right="-30px">
+                                              <Input htmlSize={32} value={productPrice} width='200px' placeholder="ราคา" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }} onChange={(e) =>setProductPrice(e.target.value)}/>
+                                            </InputGroup>
+                                          </Box>
+                                          <Textarea readOnly
+                                            placeholder="คุณสมบัติโดยรวม"
+                                            value={productfeature}
+                                            w="420px"
+                                            h="140px"
+                                            resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+                                            rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+                                            position="relative" right="-50px"
+                                            onChange={(e) =>setProductfeature(e.target.value)}
+                                          />
+                                        </Flex>
+                                        <Box position="relative" bottom="-15px" right="-10px" ><Text>รายละเอียดสินค้า</Text></Box>
+                                        
+                                        <Flex position="relative" right="-30px">
+                                          <Box position="relative" bottom="-20px">
+                                            <Textarea readOnly
+                                                placeholder="รายละเอียดสินค้า"
+                                                value={productdetails}
+                                                w="200px"
+                                                h="140px"
+                                                resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+                                                rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+                                                position="relative" bottom="-10px"
+                                                onChange={(e) => {setdetails(e.target.value);}}
+                                            />
+                                          </Box>
+
+                                          <Box position="relative" bottom="-20px" right="-20px">
+                                            <Textarea readOnly
+                                                placeholder="รายละเอียดคุณสมบัติ"
+                                                value={productdetailsfeature}
+                                                w="200px"
+                                                h="140px"
+                                                resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+                                                rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+                                                position="relative" bottom="-10px"
+                                                onChange={(e) => {setProductdetproductdetailsfeature(e.target.value);}}
+                                            />
+                                          </Box>
+
+                                          <Box position="relative" bottom="-20px" right="-40px">
+                                            <Textarea readOnly
+                                                placeholder="รายละเอียดวิธีใช้งาน"
+                                                value={productdetailshowtouse} 
+                                                w="200px"
+                                                h="140px"
+                                                resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+                                                rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+                                                position="relative" bottom="-10px"
+                                                onChange={(e)=>{setProductdeproductdetailshowtouse(e.target.value)}}
+                                            />
+                                          </Box>
+                                        </Flex>
+                                        <Flex position="relative" right="-30px" bottom="-20px">
+                                          <Box position="relative" bottom="-20px">
+                                            <Textarea readOnly
+                                                placeholder="รายละเอียดคำแนะนำ"
+                                                value={productdetailinstructions}
+                                                w="200px"
+                                                h="140px"
+                                                resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+                                                rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+                                                position="relative" bottom="-10px"
+                                                onChange={(e)=>{setProductdetailinstructions(e.target.value)} }
+                                            />
+                                          </Box>
+
+                                          <Box position="relative" bottom="-20px" right="-20px">
+                                            <Textarea readOnly
+                                                placeholder="รายละเอียดข้อควรระวัง"
+                                                value={productdetailPrecaution}
+                                                w="200px"
+                                                h="140px"
+                                                resize="vertical" // ช่วยให้ Textarea สามารถปรับขนาดตามเนื้อหา
+                                                rows={4} // จำนวนบรรทัดเริ่มต้น (ปรับตามความต้องการ)
+                                                position="relative" bottom="-10px"
+                                                onChange={(e)=>{setProductdetailPrecaution(e.target.value)}}
+                                            />
+                                          </Box>
+                                        </Flex>
+                                        </Box>
+                                    </Box>
+                                  </Box>
+
+                                  <Box w="300px" h="500px">
+                                    <Box position="relative" bottom="-10px" ><Text>ข้อมูลจำเพาะ</Text></Box>
+                                      <Box position="relative" bottom="-20px">
+                                        <Input readOnly htmlSize={32} value={productbrand} position="relative" right="-20px" width='200px' placeholder="แบรนด์" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }} onChange={(e) =>setProductbrand(e.target.value)}/>
+                                        <Input readOnly htmlSize={32} value={productmainmaterial} position="relative" bottom="-10px" right="-20px" width='200px' placeholder="วัสดุหลัก" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }} onChange={(e)=>{setProductmainmateria(e.target.value)}}/>
+                                        <Input readOnly htmlSize={32} value={productwidth} position="relative" bottom="-20px" right="-20px" width='200px' placeholder="ความสูง (ซม.)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }} onChange={(e)=>{setProductwidth(e.target.value)}}/>
+                                        <Input readOnly htmlSize={32} value={productheight} position="relative" bottom="-30px" right="-20px" width='200px' placeholder="ความกว้าง (ซม.)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }} onChange={(e)=>{setProductheight(e.target.value)}}/>
+                                        <Input readOnly htmlSize={32} value={productdepth} position="relative" bottom="-40px" right="-20px" width='200px' placeholder="ความลึก (ซม.)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }} onChange={(e)=>{setProductdepth(e.target.value)}}/>
+                                        <Input readOnly htmlSize={32} value={productsize} position="relative" bottom="-50px" right="-20px" width='200px' placeholder="ขนาดสินค้า (นิ้ว)" focusBorderColor="#0F63E9" _hover={{ borderColor: '#0F63E9' }} onChange={(e)=>{setProductsize(e.target.value)}}/>
+                                      </Box>
+                                  </Box>
+                                </Flex>
+
+                                </ModalBody>
+                                <ModalFooter fontFamily={'Kanit, sans-serif'}>
+                                  <Button onClick={() => deleteProduct(editProduct)} w="184px" h="40px" borderRadius="8px" bg="#564DE6" border="none" p={0} _hover={{ bg: '#2C23BF', boxShadow: '0 5px 10px rgba(0, 0, 0, .2)' }} position="relative" top="-70px" >
+                                    <Text color="white" fontSize="14">ลบ</Text>
+                                  </Button>
+                                </ModalFooter>
+                              </ModalContent>
+                              </Modal>
+                            </Box>
+                          </Box>
+                        </Flex>
+                      </Box>))}
+                    </Box>
+
+                    {/* สินค้าตามลำดับ  */}
+                    {/* <Box w="1500px" h="615px" bg="white" overflow="scroll" position="relative" right="-32px" bottom="-20px" >
                       <Box h="40px" borderBottom="2px solid #E7EEF3">
                         <Flex display="flex" position="relative">
                           <Box h="40px" w="80px" display="flex"  justifyContent="center">
@@ -525,7 +1029,7 @@ const ProductManagement=()=>{
                         </Flex>
                       </Box>
 
-                    </Box>
+                    </Box> */}
                 </Box>
           </Box>
         </Flex>
