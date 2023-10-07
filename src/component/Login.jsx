@@ -8,6 +8,7 @@ import catpaw from '../assets/cat paw.png';
 import { useState } from 'react';
 import api from '../services/Authen';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -15,7 +16,7 @@ const Login = () => {
 
   const nav = useNavigate();
 
-  const logging = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     const dataReq = {
@@ -27,20 +28,28 @@ const Login = () => {
     const res = await api.postLogin(dataReq);
 
     if (res.data.status) {
-      sessionStorage.setItem('merchantEmail', res.data.user.email);
+      // Successful login, show SweetAlert2 popup
+      Swal.fire({
+        icon: 'success',
+        title: 'Login Successful!',
+        text: 'You are now logged in as admin.',
+        showConfirmButton: false, // ไม่แสดงปุ่ม OK ใน SweetAlert2
+        timer: 1000,
+      });
       nav('/Home/Dashboard');
+      sessionStorage.setItem('merchantEmail', res.data.user.email);
     } else {
-      alert(res.data.message);
+      // Invalid login, show an error message
+      Swal.fire({
+        icon: 'error',
+        title: 'Login Failed',
+        text: res.data.message,
+      });
     }
   };
 
   return (
-    <Box
-      bg="#F2D4BC"
-      display="grid" // ใช้ Grid Layout
-      placeItems="center" // จัดให้เนื้อหาอยู่ตรงกลางทั้งแนวดิ่งและแนวนอน
-      minHeight="100vh" // ความสูงของ Box เท่ากับความสูงของหน้าจอ
-    >
+    <Box bg="#F2D4BC" display="grid" placeItems="center" minHeight="100vh">
       <Box
         bg="white"
         color="white"
@@ -115,12 +124,11 @@ const Login = () => {
               position="relative"
               right="-50px"
               bottom="-10px"
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Flex>
         </Box>
+        {/* <Link to="/Home/Dashboard"> */}
         <Button
           colorScheme="blue" // เลือกสีของปุ่ม (ในที่นี้ใช้สีน้ำเงิน)
           size="md" // ขนาดของปุ่ม (xs, sm, md, lg)
@@ -131,10 +139,11 @@ const Login = () => {
           right="-70px"
           bg="#6184CF"
           _hover={{ color: 'white', backgroundColor: '#6184CF' }}
-          onClick={logging}
+          onClick={handleLogin}
         >
           LOGIN
         </Button>
+        {/* </Link> */}
       </Box>
     </Box>
   );

@@ -26,6 +26,7 @@ import * as XLSX from 'xlsx';
 import { useEffect } from 'react';
 import api from '../services/BoMerchant';
 import { Logout } from '../services/Logout';
+import { v4 as uuid4 } from 'uuid';
 
 const AddProduct = (props) => {
   const [isOpen, setIsOpen] = useState(false);
